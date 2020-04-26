@@ -1,28 +1,23 @@
-// Terraform plugin for creating random ids
-resource "random_id" "instance_id" {
-  byte_length = 8
-}
+/**
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-// A single Google Cloud Engine instance
-resource "google_compute_instance" "default" {
-  name         = "flask-vm-${random_id.instance_id.hex}"
-  machine_type = "f1-micro"
-  zone         = "us-west1-a"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-9"
-    }
-  }
-
-  // Make sure flask is installed on all new instances for later steps
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq build-essential python-pip rsync; pip install flask"
-
-  network_interface {
-    network = "default"
-
-    access_config {
-      // Include this section to give the VM an external ip address
-    }
-  }
-}
+ module "network_example_simple_project" {
+   source  = "terraform-google-modules/network/google//examples/simple_project"
+   version = "2.3.0"
+   # insert the 2 required variables here
+project_id = var.project_id
+   network_name = var.network_name
+ }
