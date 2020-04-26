@@ -16,7 +16,7 @@ module "network_example_simple_project" {
     },
     {
       subnet_name           = "subnet-au"
-      subnet_ip             = "10.10.10.0/24"
+      subnet_ip             = "10.10.20.0/24"
       subnet_region         = "australia-southeast1"
       subnet_private_access = "true"
       subnet_flow_logs      = "true"
