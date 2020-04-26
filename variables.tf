@@ -15,5 +15,5 @@ variable "region" {
 
 variable "network_name" {
   description = "Name of Network"
-  type = string
+  type        = string
 }
